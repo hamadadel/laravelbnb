@@ -1,9 +1,11 @@
 <template>
-    <div>
-        <h3>{{ title }}</h3>
-        <div>
-            {{ content }}
-            <span>{{ price }}</span>
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{ title }}</h3>
+            <p class="card-text">
+                {{ content }}
+                <span>{{ price }}</span>
+            </p>
         </div>
     </div>
 </template>
