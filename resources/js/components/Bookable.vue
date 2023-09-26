@@ -3,12 +3,18 @@
         <h2>{{ name }}</h2>
         <p v-if="isLoading">Loading.....</p>
         <div v-else>
-            <BookableItem
-                v-for="bookable in bookables"
-                :title="bookable.title"
-                :content="bookable.content"
-                :price="bookable.price"
-            />
+            <div class="row mb-4" v-for="row in rows">
+                <div
+                    class="col"
+                    v-for="(bookable, column) in bookableInRow(row)"
+                >
+                    <BookableItem
+                        :title="bookable.title"
+                        :content="bookable.content"
+                        :price="bookable.price"
+                    />
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -19,16 +25,6 @@ export default {
     created() {
         setTimeout(() => {
             this.bookables = [
-                {
-                    title: "unique villa",
-                    content: "very cheap and unique villa",
-                    price: 1000,
-                },
-                {
-                    title: "elite apartment",
-                    content: "this apartment has a wonderful view",
-                    price: 1500,
-                },
                 {
                     title: "unique villa",
                     content: "very cheap and unique villa",
@@ -99,6 +95,17 @@ export default {
 
     components: {
         BookableItem,
+    },
+    methods: {
+        bookableInRow(row) {
+            return this.bookables.slice(
+                (row - 1) * this.columns,
+                row * this.columns
+            );
+        },
+        placeholderInRow(row) {
+            return this.columns - this.bookableInRow(row).length;
+        },
     },
 };
 </script>
