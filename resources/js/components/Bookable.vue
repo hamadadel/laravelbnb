@@ -8,23 +8,28 @@
                     class="col d-flex align-items-stretch"
                     v-for="(bookable, column) in bookableInRow(row)"
                 >
-                    <BookableItem
-                        :title="bookable.title"
-                        :content="bookable.description"
-                        :price="bookable.price"
-                    />
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-title">
+                                <a :href="calculateURL(bookable.id)">{{
+                                    bookable.title
+                                }}</a>
+                            </h3>
+                            <p class="card-text">
+                                {{ bookable.description }}
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
-import BookableItem from "./BookableItem.vue";
-
 export default {
     created() {
         axios.get("/api/bookables").then((response) => {
-            console.log(response);
+            console.log(response.data);
             this.bookables = response.data;
             this.isLoading = false;
         });
@@ -43,9 +48,7 @@ export default {
         },
     },
 
-    components: {
-        BookableItem,
-    },
+    components: {},
     methods: {
         bookableInRow(row) {
             return this.bookables.slice(
@@ -55,6 +58,9 @@ export default {
         },
         placeholderInRow(row) {
             return this.columns - this.bookableInRow(row).length;
+        },
+        calculateURL(id) {
+            return `/bookable/${id}`;
         },
     },
 };
