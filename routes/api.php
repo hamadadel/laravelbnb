@@ -22,5 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/bookables', function () {
     //https://kinsta.com/blog/laravel-model-factories/
-    return Bookable::all();
+    return Bookable::select('*')->offset(0)->limit(10)->get();
+});
+Route::Get('/bookable/{id}', function ($id) {
+    return Bookable::find($id);
 });
