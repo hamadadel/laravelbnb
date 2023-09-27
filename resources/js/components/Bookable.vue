@@ -5,12 +5,12 @@
         <div v-else>
             <div class="row mb-4" v-for="row in rows">
                 <div
-                    class="col"
+                    class="col d-flex align-items-stretch"
                     v-for="(bookable, column) in bookableInRow(row)"
                 >
                     <BookableItem
                         :title="bookable.title"
-                        :content="bookable.content"
+                        :content="bookable.description"
                         :price="bookable.price"
                     />
                 </div>
@@ -23,61 +23,11 @@ import BookableItem from "./BookableItem.vue";
 
 export default {
     created() {
-        setTimeout(() => {
-            this.bookables = [
-                {
-                    title: "unique villa",
-                    content: "very cheap and unique villa",
-                    price: 1000,
-                },
-                {
-                    title: "elite apartment",
-                    content: "this apartment has a wonderful view",
-                    price: 1500,
-                },
-                {
-                    title: "unique villa",
-                    content: "very cheap and unique villa",
-                    price: 1000,
-                },
-                {
-                    title: "elite apartment",
-                    content: "this apartment has a wonderful view",
-                    price: 1500,
-                },
-                {
-                    title: "unique villa",
-                    content: "very cheap and unique villa",
-                    price: 1000,
-                },
-                {
-                    title: "elite apartment",
-                    content: "this apartment has a wonderful view",
-                    price: 1500,
-                },
-                {
-                    title: "unique villa",
-                    content: "very cheap and unique villa",
-                    price: 1000,
-                },
-                {
-                    title: "elite apartment",
-                    content: "this apartment has a wonderful view",
-                    price: 1500,
-                },
-                {
-                    title: "unique villa",
-                    content: "very cheap and unique villa",
-                    price: 1000,
-                },
-                {
-                    title: "elite apartment",
-                    content: "this apartment has a wonderful view",
-                    price: 1500,
-                },
-            ];
+        axios.get("/api/bookables").then((response) => {
+            console.log(response);
+            this.bookables = response.data;
             this.isLoading = false;
-        }, 2500);
+        });
     },
     data: function () {
         return {
