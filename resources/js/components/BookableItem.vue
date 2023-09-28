@@ -25,10 +25,12 @@ export default {
         };
     },
     created() {
-        axios.get("/api/bookable/" + this.$route.params.id).then((response) => {
-            this.bookable = response.data;
-            this.isLoading = false;
-        });
+        axios
+            .get("/api/bookables/" + this.$route.params.id)
+            .then((response) => {
+                this.bookable = response.data;
+                this.isLoading = false;
+            });
     },
     computed: {},
 };
