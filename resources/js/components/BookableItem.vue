@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <h3 class="card-title">
-                <a :href="url">{{ bookable.title }}</a>
+                {{ bookable.title }}
             </h3>
             <p class="card-text">
                 {{ bookable.description }}
@@ -22,10 +22,6 @@ export default {
             this.bookable = response.data;
         });
     },
-    computed: {
-        url() {
-            return "/bookable/" + this.bookable.id;
-        },
-    },
+    computed: {},
 };
 </script>

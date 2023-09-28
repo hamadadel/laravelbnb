@@ -10,11 +10,15 @@
                 >
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">
-                                <a :href="calculateURL(bookable.id)">{{
-                                    bookable.title
-                                }}</a>
-                            </h3>
+                            <router-link
+                                :to="{
+                                    name: 'bookable',
+                                    params: { id: bookable.id },
+                                }"
+                            >
+                                <h3 class="card-title">{{ bookable.title }}</h3>
+                            </router-link>
+
                             <p class="card-text">
                                 {{ bookable.description }}
                             </p>
@@ -29,7 +33,6 @@
 export default {
     created() {
         axios.get("/api/bookables").then((response) => {
-            console.log(response.data);
             this.bookables = response.data;
             this.isLoading = false;
         });
@@ -58,9 +61,6 @@ export default {
         },
         placeholderInRow(row) {
             return this.columns - this.bookableInRow(row).length;
-        },
-        calculateURL(id) {
-            return `/bookable/${id}`;
         },
     },
 };
