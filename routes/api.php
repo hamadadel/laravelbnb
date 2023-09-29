@@ -3,7 +3,7 @@
 use App\Models\Bookable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\BookableController;
+use App\Http\Controllers\Api\{BookableController, BookableAvailabilityController};
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,3 +27,6 @@ Route::Get('/bookables/{id}', [BookableController::class, 'show']);
 
 
 Route::apiResource('bookables', BookableController::class);
+// Check availability
+Route::get('/bookables/{id}/availability', BookableAvailabilityController::class)
+    ->name('bookables.availability');
