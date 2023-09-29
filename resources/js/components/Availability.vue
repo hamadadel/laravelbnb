@@ -12,6 +12,8 @@
                     name="from"
                     class="form-control form-control-sm"
                     placeholder="Start date"
+                    v-model="from"
+                    @keyup.enter="checkAvailability"
                 />
             </div>
             <div class="form-group col-md-6">
@@ -22,16 +24,34 @@
                     name="to"
                     class="form-control form-control-sm"
                     placeholder="End date"
+                    v-model="to"
+                    @keyup.enter="checkAvailability"
                 />
             </div>
         </div>
-        <button type="button" class="btn btn-secondary mt-4 btn-block">
+        <button
+            v-on:click="checkAvailability"
+            type="button"
+            class="btn btn-secondary mt-4 btn-block"
+        >
             Block level button
         </button>
     </div>
 </template>
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            from: null,
+            to: null,
+        };
+    },
+    methods: {
+        checkAvailability() {
+            console.log("form submited");
+        },
+    },
+};
 </script>
 
 <style scoped>
