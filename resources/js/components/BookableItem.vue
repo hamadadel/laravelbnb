@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <p v-if="isLoading">Loading ...</p>
-        <div v-else class="col-md-8">
+        <div v-else class="col-md-8 pb-4">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title">
@@ -13,10 +13,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">Availability & prices</div>
+        <div class="col-md-4 pb-4">
+            <Availability />
+        </div>
     </div>
 </template>
 <script>
+import Availability from "./Availability.vue";
 export default {
     data() {
         return {
@@ -32,6 +35,6 @@ export default {
                 this.isLoading = false;
             });
     },
-    computed: {},
+    components: { Availability },
 };
 </script>
